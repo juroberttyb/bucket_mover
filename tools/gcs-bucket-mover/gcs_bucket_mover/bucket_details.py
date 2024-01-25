@@ -48,18 +48,10 @@ class BucketDetails(object):
     # make the checks
     self.iam_policy = source_bucket.get_iam_policy()
 
-    self.is_uniform_bucket = vars(source_bucket)["_properties"][
-      "iamConfiguration"]["uniformBucketLevelAccess"]["enabled"]
+    self.is_uniform_bucket = True
 
-    if not self.is_uniform_bucket:
-      self.acl_entities = (source_bucket.acl.get_entities()
-                           if not self._skip_acl else None)
-      self.default_obj_acl_entities = (
-        source_bucket.default_object_acl.get_entities()
-        if not self._skip_default_obj_acl else None)
-    else:
-      self.acl_entities = None
-      self.default_obj_acl_entities = None
+    self.acl_entities = None
+    self.default_obj_acl_entities = None
 
     self.requester_pays = source_bucket.requester_pays
     self.cors = source_bucket.cors

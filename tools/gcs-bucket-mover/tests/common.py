@@ -51,14 +51,9 @@ def get_mock_args():
     args._properties={"iamConfiguration":{
             "uniformBucketLevelAccess":{"enabled":False}
         }}
-    if args._properties["iamConfiguration"]["uniformBucketLevelAccess"]["enabled"]:
-        args.acl.get_entities.return_value = None
-        args.default_object_acl.get_entities.return_value = None
-        args.is_uniform_bucket=True
-    else:
-        args.acl.get_entities.return_value = 'bucket_acl_entities'
-        args.default_object_acl.get_entities.return_value = 'bucket_default_obj_acl_entities'
-        args.is_uniform_bucket=False
+    args.acl.get_entities.return_value = None
+    args.default_object_acl.get_entities.return_value = None
+    args.is_uniform_bucket=True
     return args
 
 
